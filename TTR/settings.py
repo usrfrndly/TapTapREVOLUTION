@@ -77,7 +77,13 @@ USE_L10N = True
 USE_TZ = True
 
 
+
+P = "lance1bass2goes2space911!"
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+OUTPUT_FOLDER = "/home/files/"
+UN ="jmh794@nyu.edu"

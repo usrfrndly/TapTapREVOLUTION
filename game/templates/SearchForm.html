@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Search on Google Music</title>
+</head>
+<body>
+
+{% if queryMessage %}
+	<p>{{ queryMessage }}</p>
+{% endif %}
+
+{% if error %}
+	<p style="color: red;">{{ resultMessage }}</p>
+{% elif resultMessage %}
+	<p style="color: green;">{{ resultMessage }}</p>
+
+{% endif %}
+
+  <form action="" method="get">
+        <input type="text" name="title">
+        <input type="submit" value="Search">
+    </form>
+
+</body>
+</html>
