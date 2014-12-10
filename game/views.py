@@ -2,23 +2,23 @@
 # Special thank you to https://github.com/maxexcloo/LastDown/blob/master/function.py
 #==============================================================================
 import codecs
-from django.shortcuts import render
-import gmusicapi.session
-import gmusicapi.clients
-from gmusicapi.utils import utils
-from gmusicapi.clients import Musicmanager, Webclient, Mobileclient
-from gmusicapi.protocol import metadata
-
-from django.http import HttpResponse, HttpRequest
-from twisted.python.util import println
 import os
 import sys
-import TTR.settings
+from time import time
+from twisted.python.util import println
+
+from django.contrib.messages.storage.base import Message
+from django.http import HttpResponse, HttpRequest
+from django.shortcuts import render
+from gmusicapi.clients import Musicmanager, Webclient, Mobileclient
+import gmusicapi.clients
+from gmusicapi.protocol import metadata
+import gmusicapi.session
+import gmusicapi.protocol
 import mutagen
 from mutagen.easyid3 import EasyID3
-from time import time
-from django.contrib.messages.storage.base import Message
-from __builtin__ import file, True
+
+import TTR.settings
 
 
 def index(request):
@@ -27,43 +27,73 @@ def index(request):
 
     #==============================================================================
 
-    # 1) Search through Google Music
+    # 1) Login to Google Music
     #==============================================================================
     api = Mobileclient()
 
-    api.login(os.environ.get(TTR.settings.UN), os.environ.get(TTR.settings.P))
+    api.login(TTR.settings.UN, TTR.settings.P)
 
-    # Search for a keyword in the Google music catalogue    
-    results = api.search_all_access("zoom", 10)
-    if len(results) < 1 or len(results.get("song_hits")) < 1:
-        return HttpResponse("No results. Search for a different keyword.")
-    else:
-        # Get the track id of the chosen song
-        first_song_id = results.get("song_hits")[0]["track"]["nid"]
+    # ==============================================================================
+    # 2) Search for Tracks
+    # ==============================================================================
+    # Search Music & Find ID
 
-    id = api.add_aa_track(first_song_id)
-    println(id)
+    def searchForTrack(text):
+        result = api.search_all_access(text)
+        if len(result) < 1 or len(result.get("song_hits")) < 1:
+            return HttpResponse("No results. Search for a different keyword.")
+        else:
+            id = result['song_hits'][0]['track']
+            path = TTR.settings.OUTPUT_FOLDER + "/" + id['artistId'][0] + " - " + id['storeId'] + ".mp3"
+            pathal = TTR.settings.OUTPUT_FOLDER + "/" + id['artistId'][0] + " - " + id['albumId'] + "/" + \
+                 id['artistId'][0] + " - " + id['storeId'] + ".mp3"
+            println(id)
+
+            # Search Error
+
+
+
+    # # Download Track
+    #     id = gmusic_download_track(id, path)
+    #     # Sleep For Rate Limit Period
+    #     time.sleep(TTR.settings.OUTPUT_FOLDER)
+    #     if id != None:
+    #         return True
+    #     else:
+    #         return False
+
+    # Search for a keyword in the Google music catalogue
+    
+    # if len(results) < 1 or len(results.get("song_hits")) < 1:
+    #     return HttpResponse("No results. Search for a different keyword.")
+    # else:
+    #     # Get the track id of the chosen song
+    #     first_song_id = results.get("song_hits")[0]["track"]["nid"]
+    #
+    # id = api.add_aa_track(first_song_id)
+
+
     #===========================================================================
     # 2) Download tracks to the server
     #===========================================================================
-    # For music manager, you will need  to use oauth, 
+    # For music manager, you will need  to use oauth,
     # and you should only have to generate the oauth once
-    mm = Musicmanager()
-    # Oauth would be stored locally at this path: gmusicapi.clients.OAUTH_FILEPATH
-    # If this path is not empty, then you have stored oauth previously, but stil must verify that it goes through
-
-
-    while gmusicapi.clients.OAUTH_FILEPATH == None and not mm.is_authenticated():
-        mm.perform_oauth(gmusicapi.clients.OAUTH_FILEPATH,
-                         True)  # If successful, this will save your credentials to disk. Then, future runs can start with:
-    if gmusicapi.clients.OAUTH_FILEPATH != None and not mm.is_authenticated():
-        success = mm.login(gmusicapi.clients.OAUTH_FILEPATH, uploader_id=None, uploader_name=None)
-    (filename, audio) = mm.download_song(first_song_id)
-    with open(filename, 'wb') as f:
-        f.write(audio)
-
-    wclient = Webclient()
-    wclient.login("jmh794@nyu.edu", "lance1bass2goes2space911!")
+    # mm = Musicmanager()
+    # # Oauth would be stored locally at this path: gmusicapi.clients.OAUTH_FILEPATH
+    # # If this path is not empty, then you have stored oauth previously, but stil must verify that it goes through
+    #
+    #
+    # while gmusicapi.clients.OAUTH_FILEPATH == None and not mm.is_authenticated():
+    #     mm.perform_oauth(gmusicapi.clients.OAUTH_FILEPATH,
+    #                      True)  # If successful, this will save your credentials to disk. Then, future runs can start with:
+    # if gmusicapi.clients.OAUTH_FILEPATH != None and not mm.is_authenticated():
+    #     success = mm.login(gmusicapi.clients.OAUTH_FILEPATH, uploader_id=None, uploader_name=None)
+    # (filename, audio) = mm.download_song(first_song_id)
+    # with open(filename, 'wb') as f:
+    #     f.write(audio)
+    #
+    # wclient = Webclient()
+    # wclient.login("jmh794@nyu.edu", "lance1bass2goes2space911!")
 
 # info = wclient.get_song_download_info(id)
 #     info
@@ -127,16 +157,18 @@ def searchForTrack(text):
     # Search Error
     except:
         common_log("", "Track Not Found: " + text)
-        continue
+
         return False
-    # Download Track
-    id = gmusic_download_track(id, path)
-    # Sleep For Rate Limit Period
-    time.sleep(TTR.settings.OUTPUT_FOLDER)
-    if id != None:
-        return True
-    else:
-        return False
+    
+    
+#     # Download Track
+#     id = gmusic_download_track(id, path)
+#     # Sleep For Rate Limit Period
+#     time.sleep(TTR.settings.OUTPUT_FOLDER)
+#     if id != None:
+#         return True
+#     else:
+#         return False
 
 # =============================================================================
 # Download Tracks
@@ -191,7 +223,7 @@ def gmusic_download_track(id, path):
         # Remove File
         try:
             os.remove(path)
-            
+
         # Remove File Error
         except:
             common_log("", "Error Deleting: " + path)
