@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -60,6 +61,8 @@ ROOT_URLCONF = 'TTR.urls'
 
 WSGI_APPLICATION = 'TTR.wsgi.application'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -92,6 +95,6 @@ P = "lance1bass2goes2space911!"
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)), "static")
 OUTPUT_FOLDER = "/Users/jaclyn/Desktop/MusicSoftware/TTR/game/static/music"
 UN ="jmh794@nyu.edu"

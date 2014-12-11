@@ -5,7 +5,8 @@ import codecs
 import httplib
 import os
 import subprocess
-
+#from game.models import DownloadedTrack
+import datetime
 from twisted.python.util import println
 from django.shortcuts import render
 from gmusicapi.clients import Webclient, Mobileclient
@@ -16,6 +17,7 @@ from subprocess import call
 from django.templatetags.static import static
 from django.http import HttpResponse
 import yaml
+import game.models
 
 
 api = Mobileclient()
@@ -210,12 +212,23 @@ def run_music_analyzers():
 def parse_analyzer_output():
 	with open('game/static/game/scripts/streamingextractoroutputfile.yaml', 'r') as f:
 		doc = yaml.load(f)
+		artist = doc['metadata']['tags']['artist']
+		album = doc['metadata']['tags']['album']
+		track = doc['metadata']['tags']['album']
+		song_length = doc['metadata']['audio_properties']['length']
+		chords_progression = doc['tonal']['chords_progression']
 		bpm = doc['rhythm']['bpm']
 		print(bpm)
 		beats_position = doc['rhythm']['beats_position']
 		print(beats_position)
 		bpm_estimates = doc['rhythm']['bpm_estimates']
 		print bpm_estimates
+		tr = game.models.DownloadedTrack(title=track,artist=artist,album=album,length=song_length,bpm=bpm,
+		                            beats_position=beats_position,bpm_estimates=bpm_estimates,
+		                            chords_progression=chords_progression,album_art_url="",song_file="",
+		                            timestamp=datetime.time.now())
+		tr.clean_fields()
+		tr.save()
 	f.close()
 
 
