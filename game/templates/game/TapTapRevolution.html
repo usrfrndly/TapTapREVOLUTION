@@ -6,6 +6,24 @@
 
 </head>
 <body>
+<script type='text/javascript' src="{% static 'game/soundmanager2/script/soundmanager2.js' %}"></script>
+<script>
+	soundManager.setup({
+		url: "{% static 'game/soundmanager2/swf/' %}",
+		onready: function () {
+			var mySound = soundManager.createSound({
+				id: 'aSound',
+				url: "{% static 'game/music/03 - Overload.mp3' %}" 
+				// onload: function() { console.log('sound loaded!', this); }
+				// other options here..
+			});
+			mySound.play();
+		},
+		ontimeout: function () {
+			// Hrmm, SM2 could not start. Missing SWF? Flash blocked? Show an error, etc.?
+		}
+	});
+</script>
 <script type='text/javascript' src="{% static 'game/js/iioEngine.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'game/js/iioDebugger.js' %}"></script>
 <script type="text/javascript" src="{% static 'game/js/TapTapRevolution.io.js' %}"></script>
