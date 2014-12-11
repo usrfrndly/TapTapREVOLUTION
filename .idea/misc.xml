@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EclipseCodeFormatter">
+    <option name="defaultSettings" value="true" />
+    <option name="id" value="1418288621600" />
+    <option name="name" value="default" />
+  </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.3.3 (/Library/Frameworks/Python.framework/Versions/3.3/bin/python3.3)" project-jdk-type="Python SDK" />
 </project>
 

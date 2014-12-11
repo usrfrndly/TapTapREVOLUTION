@@ -2,12 +2,16 @@
 
 <!doctype html>
 <html>
-<body>
+<head>
 
+</head>
+<body>
 <script type='text/javascript' src="{% static 'game/js/iioEngine.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'game/js/iioDebugger.js' %}"></script>
-
 <script type="text/javascript" src="{% static 'game/js/TapTapRevolution.io.js' %}"></script>
-<script type="text/javascript"> myStatic('{{ STATIC_URL | escapejs}}'); starttap();</script>
+
+<script type="text/javascript">iio.start(TapTapRevolution)</script>
+
+
 </body>
 </html>
