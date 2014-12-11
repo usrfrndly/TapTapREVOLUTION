@@ -26,6 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+COMPRESS_ENABLED = True
 
 # Application definition
 
@@ -37,6 +38,14 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'game',
+)
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -85,5 +94,5 @@ P = "lance1bass2goes2space911!"
 
 STATIC_URL = '/static/'
 
-OUTPUT_FOLDER = "/home/files/"
+OUTPUT_FOLDER = "/Users/jaclyn/Desktop/MusicSoftware/TTR/game/static/music"
 UN ="jmh794@nyu.edu"

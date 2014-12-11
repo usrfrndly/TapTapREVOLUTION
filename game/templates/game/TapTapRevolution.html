@@ -1,0 +1,13 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html>
+<body>
+
+<script type='text/javascript' src="{% static 'game/js/iioEngine.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'game/js/iioDebugger.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'game/js/TapTapRevolution.io.js' %}"></script>
+<script type="text/javascript"> myStatic('{{ STATIC_URL | escapejs}}'); starttap();</script>
+</body>
+</html>
