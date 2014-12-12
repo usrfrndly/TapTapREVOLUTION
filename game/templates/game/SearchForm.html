@@ -27,7 +27,7 @@ function submitform() {
 }
 </script>
 
-<form id="songSelectionForm" action="index" method="post">
+<form id="songSelectionForm" action="" method="post">
     {% csrf_token %}
     <input type="hidden" id="hid" name="downloadedId" value="{{ downloadedId }}"/>
 <input type="button" onclick="submitform()" id="selectSongButton" name="selectSongButton" value="Play with your downloaded song!" />

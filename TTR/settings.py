@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE = os.path.abspath(os.path.dirname(__name__))
+MAIN_APP = os.path.abspath(os.path.dirname(__file__))
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(MAIN_APP, ".."))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -100,8 +102,12 @@ P = "lance1bass2goes2space911!"
 STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
 
 STATIC_URL = '/static/'  # You may find this is already defined as such.
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static/')
 
 STATICFILES_DIRS = (
     STATIC_PATH,
 )
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media/')  # Absolute path to the media directory
+
 UN ="jmh794@nyu.edu"

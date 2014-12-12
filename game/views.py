@@ -4,6 +4,7 @@
 import codecs
 import os
 import subprocess
+import django.core.context_processors
 from twisted.python.util import println
 from django.shortcuts import render
 from gmusicapi.clients import Webclient, Mobileclient
@@ -34,7 +35,7 @@ webCli.login(TTR.settings.UN, TTR.settings.P)
 #
 
 def search(request):
-    pathtooutput = TTR.settings.STATIC_ROOT
+    root_path = TTR.settings.MEDIA_ROOT
 
     error = False  # title is the name field
     # If user submitted song searh form
@@ -49,20 +50,20 @@ def search(request):
         # User submitted the search form sucessfully
         else:
             queryMessage = 'You searched for: %r' % request.GET['title']
+
             searchedSongId = searchForTrack(request.GET['title'])
             # Song available in google music catalogue
             if searchedSongId:
                 # Output path to download the song to
-                tracktitle = searchedSongId['artist'] + "-" + searchedSongId[
-                    'title'] + ".mp3"
+                tracktitle = searchedSongId['artist'] + "-" + searchedSongId['title'] + ".mp3"
 
-                song_path = pathtooutput + tracktitle
+                song_path = root_path + tracktitle
 
-                common_log("search_results", "Attempting to download track to the path: " + pathtooutput)
+                common_log("search_results", "Attempting to download track to the path: " + song_path)
 
                 # Attempt to download the track with the specified id to the output path
                 # A matching song id will be returned if the download was successful
-                if searchedSongId == download_track(searchedSongId, pathtooutput):
+                if searchedSongId == download_track(searchedSongId, song_path):
                     common_log("search_results",
                                "Downloaded track " + searchedSongId['artist'] + " - " + searchedSongId['title'])
 
@@ -70,7 +71,7 @@ def search(request):
                     run_music_analyzers(song_path)
 
                     track_model_id = parse_analyzer_output(searchedSongId,
-                                                           pathtooutput)  # Returns search form/ song selection page
+                                                           song_path)  # Returns search form/ song selection page
                     return render(request, 'game/SearchForm.html',
                                   {'queryMessage': queryMessage, 'resultMessage': "We just downloaded " +
                                                                                   searchedSongId['artist'] + " - " +
@@ -111,24 +112,25 @@ def searchForTrack(text):
 
 
 # Download Track
-def download_track(songid, path):
+def download_track(songid, song_path):
+    root_path = TTR.settings.MEDIA_ROOT
     common_log("", "Downloading Track: " + songid['artist'] + " - " + songid['title'])
 
     # Download Track
     try:
         # Open Binary Mode File & Write Stream To File
-        songFile = codecs.open(path, "wb")
+        songFile = codecs.open(song_path, "wb")
         songFile.write(webCli.get_stream_audio(songid['storeId']))
         songFile.close()
 
         # Tag Track
         try:
-            mutagen_edit(path, songid['artist'], songid['album'], songid['title'],
+            mutagen_edit(song_path, songid['artist'], songid['album'], songid['title'],
                          api.get_track_info(songid['storeId'])['genre'], str(songid['trackNumber']),
                          str(api.get_album_info(songid['albumId'])['year']))
         # Mutagen Error
         except:
-            common_log("Mutagen", "Error Editing ID3 Tags: " + path)
+            common_log("Mutagen", "Error Editing ID3 Tags: " + root_path)
         return songid
     # Download Error
     except:
@@ -136,18 +138,16 @@ def download_track(songid, path):
 
         # Remove File
         try:
-            os.remove(path)
+            os.remove(root_path)
 
         # Remove File Error
         except:
-            common_log("", "Error Deleting: " + path)
+            common_log("", "Error Deleting: " + root_path)
 
 
 # ==============================================================================
 # # Common ##
 # ==============================================================================
-
-
 
 # Logging Function
 def common_log(type, text):
@@ -162,6 +162,47 @@ def common_log(type, text):
 # ==============================================================================
 # Audio Metadata
 # ==============================================================================
+def run_music_analyzers(song_path):
+    input_audio_path = song_path
+    # streaming_extractor_output_file_path = os.path.abspath('game/static/game/scripts/streamingextractoroutputfile.yaml')
+    # streaming_extractor_output_file_path = os.path.abspath('game/static/game/scripts/streamingextractoroutputfile.yaml')
+    streaming_extractor_output_file_path = os.path.abspath(
+        TTR.settings.MEDIA_ROOT + 'streamingextractoroutputfile.yaml')
+    # streaming_extractor_path = os.path.abspath('game/static/game/scripts/streaming_extractor')
+    streaming_extractor_path = os.path.abspath(TTR.settings.STATIC_ROOT + 'streaming_extractor')
+
+    return_streaming_extractor = subprocess.Popen(
+        [streaming_extractor_path, input_audio_path, streaming_extractor_output_file_path])
+    print(return_streaming_extractor)
+
+
+def parse_analyzer_output(searched_song_id, song_path):
+    # with open('game/static/game/scripts/streamingextractoroutputfile.yaml', 'r') as f:
+    with open(TTR.settings.MEDIA_ROOT + 'streamingextractoroutputfile.yaml', 'r') as f:
+        doc = yaml.load(f)
+        artist = doc['metadata']['tags']['artist']
+        album = doc['metadata']['tags']['album']
+        track = doc['metadata']['tags']['album']
+        song_length = doc['metadata']['audio_properties']['length']
+        chords_progression = doc['tonal']['chords_progression']
+        bpm = doc['rhythm']['bpm']
+        print(bpm)
+        beats_position = doc['rhythm']['beats_position']
+        print(beats_position)
+        bpm_estimates = doc['rhythm']['bpm_estimates']
+        print bpm_estimates
+        f.close()
+        #index = song_path.find('static')
+        #song_path=song_path[index:]
+
+        # TODO: Get cover albums??!
+        # searched_song_id['']
+        tr = DownloadedTrack(title=track, artist=artist, album=album, length=song_length, bpm=bpm,
+                             beats_position=beats_position, bpm_estimates=bpm_estimates,
+                             chord_progression=chords_progression, song_file=song_path)
+        tr.save()
+        return tr.id
+
 
 # Edit MP3 ID3 Tags
 def mutagen_edit(path, artist, album, title, genre, track, year):
@@ -186,56 +227,16 @@ def mutagen_edit(path, artist, album, title, genre, track, year):
     songfile.save()
 
 
-def run_music_analyzers(path_to_track):
-    input_audio_path = path_to_track
-    # streaming_extractor_output_file_path = os.path.abspath('game/static/game/scripts/streamingextractoroutputfile.yaml')
-    streaming_extractor_output_file_path = os.path.abspath('game/static/game/scripts/streamingextractoroutputfile.yaml')
-    # streaming_extractor_path = os.path.abspath('game/static/game/scripts/streaming_extractor')
-    streaming_extractor_path = os.path.abspath('game/static/game/scripts/streaming_extractor')
-
-    return_streaming_extractor = subprocess.Popen(
-        [streaming_extractor_path, input_audio_path, streaming_extractor_output_file_path])
-    print(return_streaming_extractor)
-
-
-def parse_analyzer_output(searched_song_id, path):
-    # with open('game/static/game/scripts/streamingextractoroutputfile.yaml', 'r') as f:
-    with open('game/static/game/scripts/streamingextractoroutputfile.yaml', 'r') as f:
-        doc = yaml.load(f)
-        artist = doc['metadata']['tags']['artist']
-        album = doc['metadata']['tags']['album']
-        track = doc['metadata']['tags']['album']
-        song_length = doc['metadata']['audio_properties']['length']
-        chords_progression = doc['tonal']['chords_progression']
-        bpm = doc['rhythm']['bpm']
-        print(bpm)
-        beats_position = doc['rhythm']['beats_position']
-        print(beats_position)
-        bpm_estimates = doc['rhythm']['bpm_estimates']
-        print bpm_estimates
-        f.close()
-
-        # TODO: Get cover albums??!
-        # searched_song_id['']
-        tr = DownloadedTrack(title=track, artist=artist, album=album, length=song_length, bpm=bpm,
-                             beats_position=beats_position, bpm_estimates=bpm_estimates,
-                             chord_progression=chords_progression, song_file=path)
-        tr.save()
-        return tr.id
-
-
 def index(request):
     # TODO:Come back here!
     # if 'downloadedId' in request.POST:
     # track_model_id = request.POST
     track_model_id = DownloadedTrack.objects.latest('id').id
     song_model1 = DownloadedTrack.objects.filter(id=track_model_id).values()
-
     song_model3 = json.dumps(list(song_model1), cls=DjangoJSONEncoder)
     #
     # print(song_model1)
     # print(song_model2)
-
     return render(request, "game/TapTapRevolution.html", {'song': song_model3})
 
 
