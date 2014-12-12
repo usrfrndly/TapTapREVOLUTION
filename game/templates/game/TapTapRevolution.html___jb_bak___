@@ -37,6 +37,8 @@ function TapTapRevolution(io) {
     var scoreText;
     var bpsoverall = bpm_overall / 60.0;
     var current_framerate = 60.0
+    interval_avg_bps = avg / 60.0
+
     //beats per sec
 
     soundManager.setup({
@@ -45,10 +47,34 @@ function TapTapRevolution(io) {
             var mySound = soundManager.createSound({
                 id: 'aSound',
                 url: song_file
-                // onload: function() { console.log('sound loaded!', this); }
+                autoload:true
+                onload: function() {
+                    bpm_ten_chunks = bpm_measured.chunk(10)
+                    beat_times_chunked = beat_times.chunk(10)
+                    //have the next beat queued
+                    
+                    for(i=0;i<beat_times_chunked.length;i++){
+                        soundManager.onPosition(beat_times[i], function(eventPosition){
+                            console.log(this.id + ' reached ' + eventPosition)
+                            bpmmeas = bpm_measured[i]
+                            for (i = 0; i < bpm_ten_chunks.length; i++) {
+                                avg = bpm_ten_chunks[i].average()
+                                //divide it for seconds
+                                factor = interval_avg_bps / bpsoverall
+                                current_framerate = factor * current_framerate
+
+                                beat_times[i + 1]
+                                soundManager.position
+                                    console.log(this.id + ' reached ' + eventPosition)
+                                });
+
+                            fireBeat(bpmmeas)
+
+                    });
+                    mySound.play();
+                    console.log('sound loaded!', this); }
                 // other options here..
             });
-            mySound.play();
         },
         ontimeout: function () {
             // Hrmm, SM2 could not start. Missing SWF? Flash blocked? Show an error, etc.?
@@ -281,50 +307,34 @@ function TapTapRevolution(io) {
 //			}
 
     });
-    Array.prototype.average = function () {
-        var sum = 0;
-        var j = 0;
-        for (var i = 0; i < this.length; i++) {
-            if (isFinite(this[i])) {
-                sum = sum + parseFloat(this[i]);
-                j++;
+
+
+
+
+        Array.prototype.average = function () {
+            var sum = 0;
+            var j = 0;
+            for (var i = 0; i < this.length; i++) {
+                if (isFinite(this[i])) {
+                    sum = sum + parseFloat(this[i]);
+                    j++;
+                }
             }
+            if (j === 0) {
+                return 0;
+            } else {
+                return sum / j;
+            }
+
         }
-        if (j === 0) {
-            return 0;
-        } else {
-            return sum / j;
+        Array.prototype.chunk = function (chunkSize) {
+            var array = this;
+            return [].concat.apply([],
+                    array.map(function (elem, i) {
+                        return i % chunkSize ? [] : [array.slice(i, i + chunkSize)];
+                    })
+            );
         }
-
-    }
-    Array.prototype.chunk = function (chunkSize) {
-        var array = this;
-        return [].concat.apply([],
-                array.map(function (elem, i) {
-                    return i % chunkSize ? [] : [array.slice(i, i + chunkSize)];
-                })
-        );
-    }
-    bpm_ten_chunks = bpm_measured.chunk(10)
-
-    beat_times_chunked = beat_times.chunk(10)
-
-    for(i=0;i<bpm_ten_chunks.length;i++){
-        avg = bpm_ten_chunks[i].average()
-        //divide it for seconds
-        interval_avg_bps = avg / 60.0
-        factor = interval_avg_bps/bpsoverall
-        current_framerate = factor * current_framerate
-
-        beat_times[i+1]
-        oun
-        soundManager.onPosition('aSound',)
-
-
-
-
-
-
 
     }
 
