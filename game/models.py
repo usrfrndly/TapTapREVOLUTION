@@ -9,8 +9,8 @@ class DownloadedTrack(models.Model):
 	bpm = models.FloatField()
 	beats_position = models.TextField()
 	bpm_estimates = models.TextField()
-	chord_progression = models.TextField()
-	album_art_url = models.URLField()
-	song_file = models.FileField(upload_to="songs")
-	timestamp = models.DateTimeField()
+	chord_progression = models.TextField(null=True)
+	album_art_url = models.URLField(null=True)
+	song_file = models.FileField(upload_to="songs", null=True)
+	timestame = models.DateTimeField(auto_now_add=True)
 

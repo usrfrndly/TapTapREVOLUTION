@@ -37,7 +37,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'south',
+    'jquery',
     'game',
+
 )
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
@@ -96,5 +99,5 @@ P = "lance1bass2goes2space911!"
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)), "static")
-OUTPUT_FOLDER = "/Users/jaclyn/Desktop/MusicSoftware/TTR/game/static/music"
+OUTPUT_FOLDER = "/Users/jaclyn/Desktop/MusicSoftware/TTR/game/static/game/music"
 UN ="jmh794@nyu.edu"

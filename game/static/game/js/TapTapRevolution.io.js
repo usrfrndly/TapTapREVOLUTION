@@ -11,7 +11,6 @@ function TapTapRevolution(io) {
 	var score = 0;
 	var main_arrows = [];
 	var moving_arrows = [];
-
 	var scoreText;
 	(function () {
 
@@ -206,7 +205,7 @@ function TapTapRevolution(io) {
 
 	})();
 //Main Update Function
-	io.setFramerate(60, function(){
+	io.setFramerate(bpm_overall, function(){
 		//update the player
 		updateScore();
 
