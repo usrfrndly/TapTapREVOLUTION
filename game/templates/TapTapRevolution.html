@@ -2,8 +2,6 @@
 <!doctype html>
 <html>
 <head>
-
-
 </head>
 <body>
 
@@ -14,6 +12,7 @@
 
 
 <script type="text/javascript">
+
 function chunk (arr, len) {
 
   var chunks = [],
@@ -25,7 +24,7 @@ function chunk (arr, len) {
   }
 
   return chunks;
-};
+}
 
 function TapTapRevolution(io) {
     var songinfo = {{ song | safe }};
@@ -51,121 +50,14 @@ function TapTapRevolution(io) {
     var scoreText;
     var bpsoverall = bpm_overall / 60.0;
     var current_framerate = 60.0;
-
-
-    //set up sound
-    (function(){
-
-        moveToTop = function (obj, direction) {
-            if (direction == 0) {
-                obj.setPos(CANVAS_WIDTH - canvasHorizontalSpacing, 0)
-            }
-            else if (direction == 1) {
-                obj.setPos(CANVAS_WIDTH - (canvasHorizontalSpacing * 3.0), 0);
-                return true;
-            }
-            else if (direction == 2) {
-                obj.setPos((canvasHorizontalSpacing * 3.0), 0)
-            }
-            else if (direction == 3) {
-                obj.setPos(canvasHorizontalSpacing, 0)
-            }
-
-        }
-
-        fireBeat = function () {
-            io.setFramerate(current_framerate, function () {
-                var arrowkey = iio.getRandomInt(0, 3);
-                moving_arrows[arrowkey].setVel(0, 2)
-                //     //update the player
-                updateScore();
-            })
-        }
-
-        soundManager.setup({
-            url: "{% static 'swf/soundmanager2.swf' %}",
-            flashVersion: 8,
-            onready: function(){
-                var mySound = soundManager.createSound({
-                    id: 'aSound',
-                    url: song_file,
-                    autoload: true,
-                    autoplay:true,
-                    onload: function () {
-
-                    } //end onload
-                }); //end createsound
-
-
-                var bpm_chunks = chunk(bpm_measured,10);
-                var beat_times_chunked = chunk(beat_times,10);
-                if(bpm_chunks[0][0][0] == "["){
-                    bpm_chunks[0][0] = bpm_chunks[0][0].slice(1)
-                }
-                if(bpm_chunks[bpm_chunks.length - 1][bpm_chunks[bpm_chunks.length - 1].length - 1][bpm_chunks[bpm_chunks.length - 1][bpm_chunks[bpm_chunks.length - 1].length - 1].length - 1] == "]"){
-                    bpm_chunks[bpm_chunks.length - 1][bpm_chunks[bpm_chunks.length - 1].length - 1] = bpm_chunks[bpm_chunks.length - 1][bpm_chunks[bpm_chunks.length - 1].length - 1].slice(0,bpm_chunks[bpm_chunks.length - 1][bpm_chunks[bpm_chunks.length - 1].length - 1].length-1)
-                }
-                if(beat_times_chunked[0][0][0] == "["){
-                    beat_times_chunked[0][0] = beat_times_chunked[0][0].slice(1)
-                }
-
-                if (beat_times_chunked[beat_times_chunked.length - 1][beat_times_chunked[beat_times_chunked.length - 1].length - 1][beat_times_chunked[beat_times_chunked.length - 1][beat_times_chunked[beat_times_chunked.length - 1].length - 1].length - 1] == "]") {
-                    beat_times_chunked[beat_times_chunked.length - 1][beat_times_chunked[beat_times_chunked.length - 1].length - 1] = beat_times_chunked[beat_times_chunked.length - 1][beat_times_chunked[beat_times_chunked.length - 1].length - 1].slice(0, beat_times_chunked[beat_times_chunked.length - 1][beat_times_chunked[beat_times_chunked.length - 1].length - 1].length - 1)
-                }
-                    for (var i = 0; i < bpm_chunks.length; i++) {
-                    var sum = 0;
-                    for( var x = 0; x < bpm_chunks[i].length; x++ ){
-                        sum += parseFloat(bpm_chunks[i][x]); //don't forget to add the base
-                    }
-
-                    var avg = sum/bpm_chunks[i].length;
-          
-
-                    console.log("The sum is: " + sum + ". The average is: " + avg );
-                    var interval_avg_bps = avg / 60.0;
-                    var factor = interval_avg_bps / bpsoverall
-                    var beatchunks = [beat_times_chunked[i], bpm_chunks[i], factor]
-                }
-
-
-
-
-                for (var i = 0; i < beatchunks.length; i++) {
-                    soundManager.onPosition(parseFloat(beatchunks[i][0]), function (eventPosition) {
-                        console.log(this.id + ' reached ' + eventPosition);
-                        //divide it for seconds
-                        current_framerate = parseFloat(beatchunks[i][3])* current_framerate
-                        console.log(this.id + ' reached ' + eventPosition)
-
-                    });
-                    fireBeat();
-                }
-                mySound.play();
-                console.log('sound loaded!', this);
-
-            }
-
-        })
-
-
-})();
-
-    (function() {
-
-        io.setBGColor('#5e3f6b');
-
-        //io.addObj(new iio.Text('Your Score:', CANVAS_WIDTH - 100, 70)
-        io.addObj(new iio.Text('Your Score:', io.canvas.width - 150, 70)
-                .setFont('30px Century Gothic')
-                .setTextAlign('right')
-                .setFillStyle('#ffffff'));
-        scoreText = io.addObj(new iio.Text(score, io.canvas.width - 100, 70)
-                .setFont('30px Century Gothic')
-                .setTextAlign('right')
-                .setFillStyle('#ffffff'));
-    })();
-
-
+    var inactiveArrows = [0,1,2,3];
+    var beatchunks = [];
+    var count = 0;
+    var RIGHT = 0;
+        var UP = 1;
+        var DOWN = 2;
+        var LEFT = 3;
+        var input = [];
     // Move to top
 
 
@@ -173,6 +65,15 @@ function TapTapRevolution(io) {
      * Score Board
      */
     (function () {
+
+
+
+        moveToTop = function (obj) {
+            obj.pos.y = 0;
+            obj.setVel(0, 2);
+
+
+        };
         var playerSpeed = 8;
         /*
          //    Nonmoving arrows
@@ -187,38 +88,32 @@ function TapTapRevolution(io) {
         downArrowImage.src = staticurl + "images/down-border@1.5x.png";
         leftArrowImage.src = staticurl + "images/left-border@1.5x.png";
         var rightArrow, upArrow, downArrow, leftArrow;
-        rightArrowImage.onload = function () {
-            rightArrow = new iio.SimpleRect(CANVAS_WIDTH - canvasHorizontalSpacing, CANVAS_HEIGHT - ARROW_SIZE, 42, 42)
-                    .createWithImage(rightArrowImage);
-            main_arrows.push(rightArrow)
-            io.addObj(rightArrow)
-        }
+        rightArrowImage.onload = function (RIGHT) {
+           rightArrow =  io.addObj(new iio.SimpleRect(CANVAS_WIDTH - canvasHorizontalSpacing, CANVAS_HEIGHT - ARROW_SIZE, 42, 42).createWithImage(rightArrowImage));
+            main_arrows.push(rightArrow);
+        };
 
-        upArrowImage.onload = function () {
-            upArrow = new iio.SimpleRect(CANVAS_WIDTH - (canvasHorizontalSpacing * 3.0), CANVAS_HEIGHT - ARROW_SIZE, 42, 42)
-                    .createWithImage(upArrowImage);
+        upArrowImage.onload = function (UP) {
+           upArrow = io.addObj(new iio.SimpleRect(CANVAS_WIDTH - (canvasHorizontalSpacing * 3.0), CANVAS_HEIGHT - ARROW_SIZE, 42, 42)
+                    .createWithImage(upArrowImage))
             main_arrows.push(upArrow)
-            io.addObj(upArrow)
 
-        }
 
-        downArrowImage.onload = function () {
-            downArrow = new iio.SimpleRect(canvasHorizontalSpacing * 3.0, CANVAS_HEIGHT - ARROW_SIZE, 42, 42)
-                    .createWithImage(downArrowImage);
+        };
+
+        downArrowImage.onload = function (DOWN) {
+            downArrow =  io.addObj(new iio.SimpleRect(canvasHorizontalSpacing * 3.0, CANVAS_HEIGHT - ARROW_SIZE, 42, 42)
+                    .createWithImage(downArrowImage));
             main_arrows.push(downArrow)
-            io.addObj(downArrow)
+        };
 
+        leftArrowImage.onload = function (LEFT) {
+            leftArrow = io.addObj(new iio.SimpleRect(canvasHorizontalSpacing, CANVAS_HEIGHT - ARROW_SIZE, 42, 42)
+                    .createWithImage(leftArrowImage));
+            main_arrows.push(leftArrow);
 
-        }
+        };
 
-        leftArrowImage.onload = function () {
-            leftArrow = new iio.SimpleRect(canvasHorizontalSpacing, CANVAS_HEIGHT - ARROW_SIZE, 42, 42)
-                    .createWithImage(leftArrowImage);
-            main_arrows.push(leftArrow)
-            io.addObj(leftArrow)
-
-
-        }
 
 
 
@@ -243,49 +138,62 @@ function TapTapRevolution(io) {
                     .createWithImage(rightArrowMovingImage)
                     .enableKinematics()
                     .setVel(0, 2)
-                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, moveToTop(0));
-            moving_arrows.push(rightArrowMoving)
-            io.addObj(rightArrowMoving)
+                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, moveToTop);
 
-        }
+            var object1 = io.addObj(rightArrowMoving)
+            moving_arrows.push(object1)
+
+        };
 
         upArrowMovingImage.onload = function () {
             upArrowMoving = new iio.SimpleRect(CANVAS_WIDTH - (canvasHorizontalSpacing * 3.0), 0, 42, 42)
                     .createWithImage(upArrowMovingImage)
                     .enableKinematics()
                     .setVel(0, 2)
-                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, moveToTop(1));
+                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, moveToTop);
+            var object1 = io.addObj(upArrowMoving)
+            moving_arrows.push(object1);
 
-            moving_arrows.push(upArrowMoving);
-            io.addObj(upArrowMoving)
 
-        }
+        };
 
         downArrowMovingImage.onload = function () {
             downArrowMoving = new iio.SimpleRect(canvasHorizontalSpacing * 3.0, 0, 42, 42)
                     .createWithImage(downArrowMovingImage)
                     .enableKinematics()
                     .setVel(0, 2)
-                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, moveToTop(2));
-            moving_arrows.push(downArrowMoving);
-            io.addObj(downArrowMoving)
+                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, moveToTop);
+            var object1 = io.addObj(downArrowMoving)
+            moving_arrows.push(object1);
 
-        }
+
+        };
 
         leftArrowMovingImage.onload = function () {
             leftArrowMoving = new iio.SimpleRect(canvasHorizontalSpacing, 0, 42, 42).createWithImage(leftArrowMovingImage)
                     .enableKinematics()
                     .setVel(0, 2)
-                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, moveToTop(3));
-            moving_arrows.push(leftArrowMoving);
-            io.addObj(leftArrowMoving)
-        }
+                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, function(){
+                        this.pos.y = 0;
+                        this.setVel(0, 2);
+                        inactiveArrows.push(LEFT)
+
+
+                        
+
+
+                    });
+            var object1 = io.addObj(leftArrowMoving);
+            moving_arrows.push(object1);
+
+        };
 
         var RIGHT = 0;
         var UP = 1;
         var DOWN = 2;
         var LEFT = 3;
         var input = [];
+
         updateInput = function (event, boolValue) {
             if (iio.keyCodeIs('left arrow', event)) {
                 input[LEFT] = boolValue;
@@ -340,7 +248,132 @@ function TapTapRevolution(io) {
                 updateInput(event, false);
             });
 
+        fireBeat = function () {
+            var randomIndex = Math.floor(Math.random() * inactiveArrows.length);
+            var randomArrow = moving_arrows[randomIndex];
+            io.setFramerate(current_framerate, function () {
+              
+                randomArrow.setVel(0, 2)
+                //     //update the player
+                inactiveArrows.splice(randomIndex,1);
+                updateScore();
+            })
+        };
+
         })();
+
+
+        (function() {
+
+        io.setBGColor('#5e3f6b');
+
+        //io.addObj(new iio.Text('Your Score:', CANVAS_WIDTH - 100, 70)
+        io.addObj(new iio.Text('Your Score:', io.canvas.width - 150, 70)
+                .setFont('30px Century Gothic')
+                .setTextAlign('right')
+                .setFillStyle('#ffffff'));
+        scoreText = io.addObj(new iio.Text(score, io.canvas.width - 100, 70)
+                .setFont('30px Century Gothic')
+                .setTextAlign('right')
+                .setFillStyle('#ffffff'));
+    })();
+
+
+    //set up sound
+    (function(){
+
+        //analyze the song
+        var bpm_chunks = chunk(bpm_measured, 10);
+        var beat_times_chunked = chunk(beat_times, 10);
+        if (bpm_chunks[0][0][0] == "[") {
+            bpm_chunks[0][0] = bpm_chunks[0][0].slice(1)
+        }
+        if (bpm_chunks[bpm_chunks.length - 1][bpm_chunks[bpm_chunks.length - 1].length - 1][bpm_chunks[bpm_chunks.length - 1][bpm_chunks[bpm_chunks.length - 1].length - 1].length - 1] == "]") {
+            bpm_chunks[bpm_chunks.length - 1][bpm_chunks[bpm_chunks.length - 1].length - 1] = bpm_chunks[bpm_chunks.length - 1][bpm_chunks[bpm_chunks.length - 1].length - 1].slice(0, bpm_chunks[bpm_chunks.length - 1][bpm_chunks[bpm_chunks.length - 1].length - 1].length - 1)
+        }
+        if (beat_times_chunked[0][0][0] == "[") {
+            beat_times_chunked[0][0] = beat_times_chunked[0][0].slice(1)
+        }
+
+        if (beat_times_chunked[beat_times_chunked.length - 1][beat_times_chunked[beat_times_chunked.length - 1].length - 1][beat_times_chunked[beat_times_chunked.length - 1][beat_times_chunked[beat_times_chunked.length - 1].length - 1].length - 1] == "]") {
+            beat_times_chunked[beat_times_chunked.length - 1][beat_times_chunked[beat_times_chunked.length - 1].length - 1] = beat_times_chunked[beat_times_chunked.length - 1][beat_times_chunked[beat_times_chunked.length - 1].length - 1].slice(0, beat_times_chunked[beat_times_chunked.length - 1][beat_times_chunked[beat_times_chunked.length - 1].length - 1].length - 1)
+        }
+
+
+
+        for (var i = 0; i < bpm_chunks.length; i++) {
+            var sum = 0;
+            for (var x = 0; x < bpm_chunks[i].length; x++) {
+                sum += parseFloat(bpm_chunks[i][x]); //don't forget to add the base
+            }
+
+            var avg = sum / bpm_chunks[i].length;
+
+
+            console.log("The sum is: " + sum + ". The average is: " + avg);
+            var interval_avg_bps = avg / 60.0;
+            var factor = interval_avg_bps / bpsoverall
+
+             beatchunks[i] = [ beat_times_chunked[i], bpm_chunks[i], factor, i];
+            console.log("beatchunks["+i+"]: beat_times_chunked[" + i + "]" + beatchunks[i] + "bpm_chunks[" + i + "]: " + beatchunks[i][1] +
+            "factor: " + beatchunks[i][2] +  " index: " + beatchunks[i][3] );
+        }
+
+        soundManager.setup({
+            url: "{% static 'swf/soundmanager2.swf' %}",
+            flashVersion: 8,
+            onready: function(){
+                var mySound = soundManager.createSound({
+                    id: 'aSound',
+                    url: song_file,
+                    autoload: true,
+                    onload: function () {
+
+                    } //end onload
+                }); //end createsound
+
+                for (var y = 0; y < beatchunks.length; y++) {
+                    console.log("set firebeat for beatime: " + beatchunks[y][0][0]);
+
+                    //IN MILLISECONDS
+                    mySound.onPosition((parseFloat(beatchunks[y][0][0]) * 1000.00), function (eventPosition) {
+                        count++;
+                        console.log(this.id + ' reached ' + eventPosition);
+                        //divide it for seconds
+
+                        current_framerate = beatchunks[count][2] * current_framerate;
+                        console.log("currentframerate: " + beatchunks[count][2] );
+                        console.log(this.id + ' reached ' + eventPosition);
+                        
+                        fireBeat();
+                        this.clearOnPosition(eventPosition);
+
+                    });
+
+                }
+                var randomIndex = Math.floor(Math.random() * inactiveArrows.length);
+                var randomArrow = moving_arrows[randomIndex];
+                
+                mySound.play();
+                io.setFramerate(60.0, function(){
+                    updateScore();
+                    randomArrow.setVel(0, 2)
+                //     //update the player
+                inactiveArrows.splice(randomIndex,1);
+            })
+                console.log('sound loaded!', this);
+
+
+            }
+
+        })
+
+
+})();
+
+    
+
+    
 //Main Update Function
 
         // fireBeat(framerate) = io.setFramerate(bpm_overall, function () {

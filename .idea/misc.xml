@@ -6,5 +6,8 @@
     <option name="name" value="default" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.3.3 (/Library/Frameworks/Python.framework/Versions/3.3/bin/python3.3)" project-jdk-type="Python SDK" />
+  <component name="SvnBranchConfigurationManager">
+    <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
 </project>
 
