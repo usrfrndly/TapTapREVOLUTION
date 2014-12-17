@@ -30,7 +30,6 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-COMPRESS_ENABLED = True
 
 # Application definition
 

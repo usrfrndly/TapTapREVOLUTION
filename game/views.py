@@ -4,8 +4,6 @@
 import codecs
 import os
 import subprocess
-import django.core.context_processors
-from twisted.python.util import println
 from django.shortcuts import render
 from gmusicapi.clients import Webclient, Mobileclient
 import mutagen
@@ -39,14 +37,18 @@ def search(request):
 
     error = False  # title is the name field
     # If user submitted song searh form
+
+    song_list = list(DownloadedTrack.objects.values('title','artist'))
+
+
     if 'title' in request.GET:
         title = request.GET['title']
         # If form was submitted but empty
         if not title:
             error = True
             resultMessage = 'You submitted an empty form'
-            return render(request, 'game/SearchForm.html', {'error': True,
-                                                            'resultMessage': resultMessage})
+            return render(request, 'SearchForm.html', {'error': True,
+                                                            'resultMessage': resultMessage,'songs': song_list})
         # User submitted the search form sucessfully
         else:
             queryMessage = 'You searched for: %r' % request.GET['title']
@@ -72,8 +74,8 @@ def search(request):
 
                     track_model_id = parse_analyzer_output(searchedSongId,
                                                            song_path)  # Returns search form/ song selection page
-                    return render(request, 'game/SearchForm.html',
-                                  {'queryMessage': queryMessage, 'resultMessage': "We just downloaded " +
+                    return render(request, 'SearchForm.html',
+                                  {'queryMessage': queryMessage,'songs': song_list, 'resultMessage': "We just downloaded " +
                                                                                   searchedSongId['artist'] + " - " +
                                                                                   searchedSongId['title'],
                                    'downloadedId': track_model_id})
@@ -81,19 +83,19 @@ def search(request):
                 # did not successfully download the song
                 else:
                     error = True
-                    common_log("search_results", "Could not download the requested track")
-                    return render(request, 'game/SearchForm.html',
-                                  {'error': error, 'queryMessage': queryMessage,
-                                   'resultMessage': 'We could not download the song you requested, please enter of a different one!'})
+                    common_log("resultMessage", "Could not download the requested track")
+                    return render(request, 'SearchForm.html',
+                                  {'error': error, 'queryMessage': queryMessage,'songs': song_list,'resultMessage': 'We could not download the song you requested, please enter of a different one!'})
 
                     # song does not exist in google music's catalogue
             else:
                 common_log("search_results", "Searched song does not exist in google catalogue")
-                return render(request, 'game/SearchForm.html', {'queryMessage': queryMessage,
-                                                                'resultMessage': 'That song is not in Google Musics catalogue. Please think of something more mainstream:',
-                                                                'error': error})  # Return search form if user did not a submit form
+                return render(request,'SearchForm.html',{ 'resultMessage': 'That song is not in Google Musics catalogue. Please think of something more mainstream:',
+                                                                'error': error,'songs': song_list})  # Return search form if user did not a submit form
     return render(request,
-                  'game/SearchForm.html')  # ==============================================================================
+                  'SearchForm.html',{'songs': song_list})
+                   #
+                  # ==============================================================================
 
 
 # Backend Google Music Search
@@ -107,7 +109,7 @@ def searchForTrack(text):
         return None
     else:
         songid = result['song_hits'][0]['track']
-        println(songid)
+#        println(songid)
         return songid
 
 
@@ -237,7 +239,7 @@ def index(request):
     #
     # print(song_model1)
     # print(song_model2)
-    return render(request, "game/TapTapRevolution.html", {'song': song_model3})
+    return render(request, "TapTapRevolution.html", {'song': song_model3})
 
 
 

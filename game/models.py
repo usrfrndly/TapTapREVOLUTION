@@ -13,4 +13,3 @@ class DownloadedTrack(models.Model):
 	album_art_url = models.URLField(null=True)
 	song_file = models.FileField(upload_to="songs", null=True)
 	timestame = models.DateTimeField(auto_now_add=True)
-
