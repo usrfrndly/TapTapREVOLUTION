@@ -2,77 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="265f334c-caa6-4b6b-9d47-c3dcbaadbf35" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TTR/media/Yes-Owner Of A Lonely Heart.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/swf/soundmanager2.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/swf/soundmanager2_debug.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/swf/soundmanager2_flash9.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/swf/soundmanager2_flash9_debug.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/swf/soundmanager2_flash_xdomain.zip" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/game/static/js/TapTapRevolution.io.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/game/static/css/bootstrap.min.css" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/game/static/DiscoBallIcon.sketch" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/game/static/game/css/TapTapRevolution.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/game/static/game/js/TapTapRevolution.io.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/game/templates/DiscoBallIconNoTip.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/game/templates/game/404.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/game/templates/game/500.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/game/templates/game/SearchForm.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/game/templates/game/TapTapRevolution.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/game/templates/game/TapTapRevolution.html___jb_bak___" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/game/templates/game/base.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/googleMusicView.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/Devi Sri Prasad;Vikram;Priya Hemesh-Meow Meow.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/Lil Mama-Lip Gloss (Main Version).mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/Matt El-Okokok.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/Mew-Am I Wry? No.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/ScHoolboy Q-Yay Yay.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/Snootie Wild (feat. Yo Gotti)-Yayo.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/css/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/roller.jpg" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/game/static/fonts/glyphicons-halflings-regular.eot" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/game/static/fonts/glyphicons-halflings-regular.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/game/static/fonts/glyphicons-halflings-regular.ttf" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/game/static/fonts/glyphicons-halflings-regular.woff" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/arrows.sketch" afterPath="$PROJECT_DIR$/game/static/images/arrows.sketch" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/down-border.png" afterPath="$PROJECT_DIR$/game/static/images/down-border.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/down-border@1.5x.png" afterPath="$PROJECT_DIR$/game/static/images/down-border@1.5x.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/down-filled.png" afterPath="$PROJECT_DIR$/game/static/images/down-filled.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/down-filled@1.5x.png" afterPath="$PROJECT_DIR$/game/static/images/down-filled@1.5x.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/left-border.png" afterPath="$PROJECT_DIR$/game/static/images/left-border.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/left-border@1.5x.png" afterPath="$PROJECT_DIR$/game/static/images/left-border@1.5x.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/left-filled.png" afterPath="$PROJECT_DIR$/game/static/images/left-filled.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/left-filled@1.5x.png" afterPath="$PROJECT_DIR$/game/static/images/left-filled@1.5x.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/right-border.png" afterPath="$PROJECT_DIR$/game/static/images/right-border.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/right-border@1.5x.png" afterPath="$PROJECT_DIR$/game/static/images/right-border@1.5x.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/right-filled.png" afterPath="$PROJECT_DIR$/game/static/images/right-filled.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/right-filled@1.5x.png" afterPath="$PROJECT_DIR$/game/static/images/right-filled@1.5x.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/up-border.png" afterPath="$PROJECT_DIR$/game/static/images/up-border.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/up-border@1.5x.png" afterPath="$PROJECT_DIR$/game/static/images/up-border@1.5x.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/up-filled.png" afterPath="$PROJECT_DIR$/game/static/images/up-filled.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/images/up-filled@1.5x.png" afterPath="$PROJECT_DIR$/game/static/images/up-filled@1.5x.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/game/static/js/bootstrap.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/js/iioDebugger.js" afterPath="$PROJECT_DIR$/game/static/js/iioDebugger.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/js/iioEngine.min.js" afterPath="$PROJECT_DIR$/game/static/js/iioEngine.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/scripts/outputfile.yaml" afterPath="$PROJECT_DIR$/game/static/scripts/outputfile.yaml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/scripts/streaming_extractor" afterPath="$PROJECT_DIR$/game/static/scripts/streaming_extractor" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/scripts/streaming_rhythmextractor_multifeature" afterPath="$PROJECT_DIR$/game/static/scripts/streaming_rhythmextractor_multifeature" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/scripts/streaming_tuningfrequency" afterPath="$PROJECT_DIR$/game/static/scripts/streaming_tuningfrequency" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/scripts/streamingextractoroutputfile.yaml" afterPath="$PROJECT_DIR$/game/static/scripts/streamingextractoroutputfile.yaml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/soundmanager2/script/soundmanager2-jsmin.js" afterPath="$PROJECT_DIR$/game/static/soundmanager2/script/soundmanager2-jsmin.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/soundmanager2/script/soundmanager2-nodebug-jsmin.js" afterPath="$PROJECT_DIR$/game/static/soundmanager2/script/soundmanager2-nodebug-jsmin.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/soundmanager2/script/soundmanager2-nodebug.js" afterPath="$PROJECT_DIR$/game/static/soundmanager2/script/soundmanager2-nodebug.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/soundmanager2/script/soundmanager2.js" afterPath="$PROJECT_DIR$/game/static/soundmanager2/script/soundmanager2.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/soundmanager2/swf/soundmanager2.swf" afterPath="$PROJECT_DIR$/game/static/soundmanager2/swf/soundmanager2.swf" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/soundmanager2/swf/soundmanager2_debug.swf" afterPath="$PROJECT_DIR$/game/static/soundmanager2/swf/soundmanager2_debug.swf" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/soundmanager2/swf/soundmanager2_flash9.swf" afterPath="$PROJECT_DIR$/game/static/soundmanager2/swf/soundmanager2_flash9.swf" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/soundmanager2/swf/soundmanager2_flash9_debug.swf" afterPath="$PROJECT_DIR$/game/static/soundmanager2/swf/soundmanager2_flash9_debug.swf" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game/static/game/soundmanager2/swf/soundmanager2_flash_xdomain.zip" afterPath="$PROJECT_DIR$/game/static/soundmanager2/swf/soundmanager2_flash_xdomain.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/models.py" afterPath="$PROJECT_DIR$/game/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TTR/settings.py" afterPath="$PROJECT_DIR$/TTR/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TTR/media/streamingextractoroutputfile.yaml" afterPath="$PROJECT_DIR$/TTR/media/streamingextractoroutputfile.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/views.py" afterPath="$PROJECT_DIR$/game/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/templates/TapTapRevolution.html" afterPath="$PROJECT_DIR$/game/templates/TapTapRevolution.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TTR.iws" />
@@ -97,6 +27,56 @@
     <option name="myUseModuleSdk" value="true" />
     <option name="myModuleName" value="TTR" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="TapTapRevolution.html" pinned="false" current="true" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/game/templates/TapTapRevolution.html">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state vertical-scroll-proportion="0.2184874" vertical-offset="3620" max-vertical-offset="5535">
+                    <caret line="245" column="80" selection-start-line="245" selection-start-column="80" selection-end-line="245" selection-end-column="80" />
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="space-shooter.htm" pinned="false" current="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/../iioengine-master 2/archives/1.2/demos/scroll-shooter/space-shooter.htm">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="360">
+                    <caret line="0" column="15" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="SpaceShooter+.io.js" pinned="false" current="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/../iioengine-master 2/archives/1.2/demos/scroll-shooter/SpaceShooter+.io.js">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="4455">
+                    <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="SpaceShooter.io.js" pinned="false" current="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/../iioengine-master 2/archives/1.2/demos/scroll-shooter/SpaceShooter.io.js">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state vertical-scroll-proportion="-7.923077" vertical-offset="409" max-vertical-offset="3135">
+                    <caret line="70" column="44" selection-start-line="70" selection-start-column="38" selection-end-line="70" selection-end-column="44" />
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="TTR">
@@ -104,14 +84,14 @@
     </favorites_list>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="vertical" split-proportion="0.65564203">
+    <splitter split-orientation="vertical" split-proportion="0.1614786">
       <split-first>
         <leaf>
-          <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/game/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="615" max-vertical-offset="4395">
-                  <caret line="35" column="39" selection-start-line="35" selection-start-column="39" selection-end-line="36" selection-end-column="0" />
+                <state vertical-scroll-proportion="-0.12962963" vertical-offset="3577" max-vertical-offset="4395">
+                  <caret line="200" column="30" selection-start-line="200" selection-start-column="30" selection-end-line="200" selection-end-column="30" />
                   <folding />
                 </state>
               </provider>
@@ -127,10 +107,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="TapTapRevolution.css" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="TapTapRevolution.css" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/game/static/css/TapTapRevolution.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.20338982" vertical-offset="345" max-vertical-offset="17025">
+                <state vertical-scroll-proportion="0.0" vertical-offset="1995" max-vertical-offset="17025">
                   <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
                   <folding />
                 </state>
@@ -191,11 +171,11 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/game/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="1740" max-vertical-offset="3825">
-                  <caret line="95" column="55" selection-start-line="95" selection-start-column="55" selection-end-line="95" selection-end-column="55" />
+                <state vertical-scroll-proportion="-0.057441253" vertical-offset="4192" max-vertical-offset="4575">
+                  <caret line="225" column="25" selection-start-line="225" selection-start-column="25" selection-end-line="225" selection-end-column="25" />
                   <folding>
                     <element signature="e#247#260#0" expanded="true" />
                   </folding>
@@ -203,21 +183,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="TapTapRevolution.html" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/game/templates/TapTapRevolution.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="99.375" vertical-offset="2640" max-vertical-offset="5235">
-                  <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="36" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="SearchForm.html" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="SearchForm.html" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/game/templates/SearchForm.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-3.0508475" vertical-offset="960" max-vertical-offset="1845">
-                  <caret line="32" column="21" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
+                <state vertical-scroll-proportion="26.958334" vertical-offset="1517" max-vertical-offset="1845">
+                  <caret line="58" column="131" selection-start-line="58" selection-start-column="131" selection-end-line="58" selection-end-column="131" />
                   <folding>
                     <element signature="n#style#0;n#h2#0;n#div#0;n#header#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#h2#1;n#div#0;n#header#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -247,7 +217,6 @@
         <option value="$PROJECT_DIR$/game/static/js/iioEngine.min.js" />
         <option value="$PROJECT_DIR$/game/googleMusicView.py" />
         <option value="$PROJECT_DIR$/game/static/js/TapTapRevolution.io.js" />
-        <option value="$PROJECT_DIR$/game/templates/TapTapRevolution.html" />
         <option value="$PROJECT_DIR$/game/templates/base.html" />
         <option value="$PROJECT_DIR$/game/static/game/js/iioEngine.min.js" />
         <option value="$PROJECT_DIR$/game/static/game/js/iioDebugger.js" />
@@ -263,9 +232,10 @@
         <option value="$PROJECT_DIR$/../iioengine-master 2/demos/scrollshooter/ScrollShooter.htm" />
         <option value="$PROJECT_DIR$/TTR/settings.py" />
         <option value="$PROJECT_DIR$/game/templates/game/SearchForm.html" />
-        <option value="$PROJECT_DIR$/game/views.py" />
-        <option value="$PROJECT_DIR$/game/templates/SearchForm.html" />
         <option value="$PROJECT_DIR$/game/static/css/TapTapRevolution.css" />
+        <option value="$PROJECT_DIR$/game/templates/SearchForm.html" />
+        <option value="$PROJECT_DIR$/game/views.py" />
+        <option value="$PROJECT_DIR$/game/templates/TapTapRevolution.html" />
       </list>
     </option>
   </component>
@@ -277,8 +247,8 @@
     <option name="targetDirectory" value="" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1311" />
-    <option name="y" value="-111" />
+    <option name="x" value="-453" />
+    <option name="y" value="774" />
     <option name="width" value="1280" />
     <option name="height" value="741" />
   </component>
@@ -431,68 +401,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TTR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TapTapREVOLUTION-master" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TTR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TapTapREVOLUTION-master" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TTR" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TapTapREVOLUTION-master" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -855,7 +763,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1311" y="-111" width="1280" height="741" extended-state="0" />
+    <frame x="-453" y="774" width="1280" height="741" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12843296" sideWeight="0.7001522" order="0" side_tool="true" content_ui="tabs" x="69" y="131" width="1080" height="532" />
@@ -870,7 +778,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297546" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28392246" sideWeight="0.33181125" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3529887" sideWeight="0.66818875" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3529887" sideWeight="0.66818875" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1776" sideWeight="0.5577524" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Get Gist" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328" sideWeight="0.49941385" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.49946865" order="8" side_tool="false" content_ui="tabs" />
@@ -986,30 +894,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TTR/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="405">
-          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="195">
-          <caret line="6" column="69" selection-start-line="6" selection-start-column="69" selection-end-line="6" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
-          <caret line="0" column="28" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/game/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="135">
@@ -1316,33 +1200,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game/templates/TapTapRevolution.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="99.375" vertical-offset="2640" max-vertical-offset="5235">
-          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game/templates/SearchForm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.0508475" vertical-offset="960" max-vertical-offset="1845">
-          <caret line="32" column="21" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
-          <folding>
-            <element signature="n#style#0;n#h2#0;n#div#0;n#header#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h2#1;n#div#0;n#header#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="615" max-vertical-offset="4395">
-          <caret line="35" column="39" selection-start-line="35" selection-start-column="39" selection-end-line="36" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/game/static/css/prettyPhoto.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="5775">
@@ -1351,10 +1208,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/game/templates/SearchForm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="26.958334" vertical-offset="1517" max-vertical-offset="1845">
+          <caret line="58" column="131" selection-start-line="58" selection-start-column="131" selection-end-line="58" selection-end-column="131" />
+          <folding>
+            <element signature="n#style#0;n#h2#0;n#div#0;n#header#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h2#1;n#div#0;n#header#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/game/static/css/TapTapRevolution.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20338982" vertical-offset="345" max-vertical-offset="17025">
+        <state vertical-scroll-proportion="0.0" vertical-offset="690" max-vertical-offset="17025">
           <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.12962963" vertical-offset="3577" max-vertical-offset="4395">
+          <caret line="200" column="30" selection-start-line="200" selection-start-column="30" selection-end-line="200" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../iioengine-master 2/archives/1.2/demos/scroll-shooter/space-shooter.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+          <caret line="0" column="15" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../iioengine-master 2/archives/1.2/demos/scroll-shooter/SpaceShooter.io.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.923077" vertical-offset="409" max-vertical-offset="3135">
+          <caret line="70" column="44" selection-start-line="70" selection-start-column="38" selection-end-line="70" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../iioengine-master 2/archives/1.2/demos/scroll-shooter/SpaceShooter+.io.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4455">
+          <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game/templates/TapTapRevolution.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2184874" vertical-offset="3620" max-vertical-offset="5535">
+          <caret line="245" column="80" selection-start-line="245" selection-start-column="80" selection-end-line="245" selection-end-column="80" />
           <folding />
         </state>
       </provider>
