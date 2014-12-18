@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
+<<<<<<< HEAD
+=======
+    <file url="file://$PROJECT_DIR$/game/templates/game/base.html" libraries="{jquery-latest}" />
+>>>>>>> 5ff94f519ac28607774c68d9e2586f8e8c28dc2e
     <file url="PROJECT" libraries="{jQuery UI-1.10.2, jQuery-2.0.0, jquery-latest}" />
   </component>
 </project>
