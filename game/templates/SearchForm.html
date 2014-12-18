@@ -48,6 +48,7 @@ rel="stylesheet"/>
 {% endif %}
 
 {% if downloadedId %}
+    <script>
 function submitform() {
     $("#songSelectionForm").submit();
 }
@@ -56,7 +57,7 @@ function submitform() {
 <form id="songSelectionForm" action="" method="post">
     {% csrf_token %}
     <input type="hidden" id="hid" name="downloadedId" value="{{ downloadedId }}"/>
-<input type="button" onclick="submitform()" id="selectSongButton" name="selectSongButton" value="Play with your downloaded song!" />
+<input type="button" onclick="submitform()" id="selectSongButton" name="selectSongButton" value="Play with your downloaded song!" >
 </form>
 
 {% endif %}
@@ -67,11 +68,10 @@ function submitform() {
         <div class="row">
           <div class="span12">
             <div class="cform" id="theme-form">
-              <form action="#" method="post" class="cform-form">
-              {% csrf_token %}
+              <form action="" class="cform-form">
                 <div class="row">
                   <div class="span5"> <span class="your-input">
-                    <input type="text" name="your-input" placeholder="Enter a song, artist, or album" class="cform-text" size="40" title="Input a song">
+                    <input type="text" name="title" placeholder="Enter a song, artist, or album" class="cform-text" size="40" title="Input a song">
                     </span> </div>
                   <div class="span5"> <span class="dropdown-choice">
                     <select name="dropdown-choice" placeholder="Your Dropdown Choice" class="cform-text" title="Your Dropdown Choice">
@@ -95,6 +95,5 @@ function submitform() {
       
       <!-- /.container -->
       </div></header></div>
-</div></body>
 </body>
 </html>

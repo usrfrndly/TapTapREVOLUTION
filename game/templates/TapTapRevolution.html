@@ -27,7 +27,6 @@ function chunk(arr, len) {
 }
 
 function TapTapRevolution(io) {
-    var RIGHT;
     var songinfo = {{ song | safe }};
     var bpm_overall;
     bpm_overall = songinfo[0].bpm;
@@ -49,12 +48,12 @@ function TapTapRevolution(io) {
     var moving_arrows = [];
     var scoreText;
     var bpsoverall = bpm_overall / 60.0;
-    var current_framerate = 60.0;
     var initial_framerate = 60.0;
+    var current_framerate = 60.0;
     var inactiveArrows = [0, 1, 2, 3];
     var beatchunks = [];
     var count = 0;
-    RIGHT = 0;
+    var RIGHT = 0;
     var UP = 1;
     var DOWN = 2;
     var LEFT = 3;
@@ -62,9 +61,18 @@ function TapTapRevolution(io) {
     // Move to top
 
 
-    /* LAYOUT AND BACKGROUND SETTINGS  */
+    /**
+     * Score B
+     *
+     *
+     *
+     *
+     *
+     * oard
+     */
 
     (function () {
+
         io.setBGColor('#5e3f6b');
 
         //io.addObj(new iio.Text('Your Score:', CANVAS_WIDTH - 100, 70)
@@ -77,9 +85,8 @@ function TapTapRevolution(io) {
                 .setTextAlign('right')
                 .setFillStyle('#ffffff'));
     })();
-    (function () {
+    create_arrows = function () {
 
-        var playerSpeed = 8;
         /*
          //    Nonmoving arrows
          */
@@ -100,7 +107,7 @@ function TapTapRevolution(io) {
 
         upArrowImage.onload = function () {
             upArrow = io.addObj(new iio.SimpleRect(CANVAS_WIDTH - (canvasHorizontalSpacing * 3.0), CANVAS_HEIGHT - ARROW_SIZE, 42, 42)
-                    .createWithImage(upArrowImage))
+                    .createWithImage(upArrowImage));
             main_arrows.push(upArrow)
 
 
@@ -120,6 +127,7 @@ function TapTapRevolution(io) {
         };
 
 
+
         /*******************/
         /*  Moving arrows */
 
@@ -133,112 +141,127 @@ function TapTapRevolution(io) {
         downArrowMovingImage.src = staticurl + "images/down-filled@1.5x.png";
         leftArrowMovingImage.src = staticurl + "images/left-filled@1.5x.png";
         var rightArrowMoving, upArrowMoving, downArrowMoving, leftArrowMoving;
+
         rightArrowMovingImage.onload = function () {
-            rightArrowMoving =  io.addObj(new iio.SimpleRect(CANVAS_WIDTH - canvasHorizontalSpacing, 0, 42, 42)
+            rightArrowMoving = io.addObj(new iio.SimpleRect(CANVAS_WIDTH - canvasHorizontalSpacing, 0, 42, 42)
                     .createWithImage(rightArrowMovingImage)
                     .enableKinematics()
-                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, function () {
-                        rightArrowMoving.pos.y = 0;
-                        this.setVel(0, 0)
-                        inactiveArrows.push(RIGHT)
+                    //.setVel(0, 2)
+                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, function(obj){
+                        obj.pos.y = 0;
+                        obj.vel.y = 0;
+                        //inactiveArrows.push(RIGHT)
+                        return true;
                     }));
-            moving_arrows.push(rightArrowMoving);
-
+                moving_arrows.push(rightArrowMoving);
         };
 
         upArrowMovingImage.onload = function () {
             upArrowMoving = io.addObj(new iio.SimpleRect(CANVAS_WIDTH - (canvasHorizontalSpacing * 3.0), 0, 42, 42)
                     .createWithImage(upArrowMovingImage)
                     .enableKinematics()
-                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, function () {
-                        upArrowMoving.pos.y = 0;
-                        this.setVel(0, 0);
-                        inactiveArrows.push(UP)
+                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, function (obj) {
+                        obj.pos.y = 0;
+                        obj.vel.y = 0;
+                        //inactiveArrows.push(UP);
+                        return true;
                     }));
             moving_arrows.push(upArrowMoving);
-
-
         };
 
         downArrowMovingImage.onload = function () {
-            downArrowMoving =  io.addObj(new iio.SimpleRect(canvasHorizontalSpacing * 3.0, 0, 42, 42)
+            downArrowMoving = io.addObj(new iio.SimpleRect(canvasHorizontalSpacing * 3.0, 0, 42, 42)
                     .createWithImage(downArrowMovingImage)
                     .enableKinematics()
-                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, function () {
-                        downArrowMoving.pos.y = 0;
-                        this.setVel(0, 0);
-                        inactiveArrows.push(DOWN);
-
+                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, function (obj) {
+                        obj.pos.y = 0;
+                        obj.vel.y = 0
+                        //inactiveArrows.push(DOWN);
+                        return true;
                     }));
             moving_arrows.push(downArrowMoving);
-
-
         };
 
         leftArrowMovingImage.onload = function () {
-            leftArrowMoving =  io.addObj(new iio.SimpleRect(canvasHorizontalSpacing, 0, 42, 42)
-                    .createWithImage(leftArrowMovingImage)
+            leftArrowMoving =  io.addObj(new iio.SimpleRect(canvasHorizontalSpacing, 0, 42, 42).createWithImage(leftArrowMovingImage)
                     .enableKinematics()
-                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, function () {
-                        leftArrowMoving.pos.y = 0;
-                        this.setVel(0, 0);
-                        inactiveArrows.push(LEFT)
-
+                    .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, function (obj) {
+                        obj.pos.y = 0;
+                        obj.vel.y = 0;
+                        //inactiveArrows.push(LEFT);
+                        return true;
 
                     }));
             moving_arrows.push(leftArrowMoving);
 
         };
+    };
 
-        var RIGHT = 0;
-        var UP = 1;
-        var DOWN = 2;
-        var LEFT = 3;
-        var input = [];
+
+    create_arrows();
+
 
         updateInput = function (event, boolValue) {
             if (iio.keyCodeIs('left arrow', event)) {
                 input[LEFT] = boolValue;
+
+                if (iio.intersects(moving_arrows[LEFT], main_arrows[LEFT]) == true) {
+
+                    updateScore()
+                }
+
             }
             if (iio.keyCodeIs('right arrow', event)) {
                 input[RIGHT] = boolValue;
+
+                if (input[RIGHT] == true && (iio.intersects(moving_arrows[RIGHT], main_arrows[RIGHT]) == true)) {
+                    updateScore()
+                }
             }
 
             if (iio.keyCodeIs('up arrow', event)) {
-                input[UP] = boolValue;
+                if (input[UP] == true && (iio.intersects(moving_arrows[UP], main_arrows[UP]) == true)) {
+
+                    input[UP] = boolValue;
+
+                    updateScore();
+                }
                 event.preventDefault();
 
 
             }
             if (iio.keyCodeIs('down arrow', event)) {
+                if (input[DOWN] == true && (iio.intersects(moving_arrows[DOWN], main_arrows[DOWN]) == true)) {
+
                 input[DOWN] = boolValue;
+                    updateScore();
+
+                }
                 event.preventDefault();
 
             }
         };
         updateScore = function () {
-            var overlaps = [];
+{#            var overlaps = [];#}
+{##}
+{#            if (input[LEFT] == true && (iio.intersects(moving_arrows[LEFT], main_arrows[LEFT]) == true)) {#}
+{#                overlaps.push(LEFT);#}
+{#            }#}
+{#            if (input[RIGHT] == true && (iio.intersects(moving_arrows[RIGHT], main_arrows[RIGHT]) == true)) {#}
+{#                overlaps.push(RIGHT);#}
+{#            }#}
+{#            if (input[UP] == true && (iio.intersects(moving_arrows[UP], main_arrows[UP]) == true)) {#}
+{#                overlaps.push(UP);#}
+{#            }#}
+{#            if (input[DOWN] == true && (iio.intersects(moving_arrows[DOWN], main_arrows[DOWN]) == true)) {#}
+{#                overlaps.push(DOWN);#}
+{#            }#}
+{#            if (overlaps.length > 0) {#}
 
-            if (input[LEFT] == true && (iio.intersects(moving_arrows[LEFT], main_arrows[LEFT]) == true)) {
-                overlaps.push(LEFT);
-            }
-            if (input[RIGHT] == true && (iio.intersects(moving_arrows[RIGHT], main_arrows[RIGHT]) == true)) {
-                overlaps.push(RIGHT);
-            }
-            if (input[UP] == true && (iio.intersects(moving_arrows[UP], main_arrows[UP]) == true)) {
-                overlaps.push(UP);
-            }
-            if (input[DOWN] == true && (iio.intersects(moving_arrows[DOWN], main_arrows[DOWN]) == true)) {
-                overlaps.push(DOWN);
-            }
-            if (overlaps.length > 0) {
-                var pointsToAdd = 0;
-                for (var o = 0; o < overlaps.length; o++) {
-                    pointsToAdd += 2
-                }
-                score += pointsToAdd;
+                score += 2;
                 scoreText.setText(score.toString());
-            }
+{#            }#}
+
         };
 
 
@@ -251,31 +274,30 @@ function TapTapRevolution(io) {
         });
 
         fireBeat = function () {
-
             var randomIndex = iio.getRandomInt(0, inactiveArrows.length);
-            var randomArrow = moving_arrows[inactiveArrows[randomIndex]];
-            if (randomArrow != null){
 
+            io.setFramerate(current_framerate, moving_arrows[inactiveArrows[randomIndex]]);
+            moving_arrows[inactiveArrows[randomIndex]].setVel(0,2);
 
-                io.setFramerate(current_framerate);
-                randomArrow.setVel(0, 2);
-                inactiveArrows.splice(randomIndex, 1);
+//            var randomArrow = moving_arrows[inactiveArrows[randomIndex]];
 
-                updateScore();
-        }
                 //     //update the player
+               // inactiveArrows.splice(randomIndex, 1);
+               // updateScore();
 
         };
 
-    })();
+
+
+
 
 
     //set up sound
-    (function () {
+    setupsound = function () {
 
         //analyze the song
-        var bpm_chunks = chunk(bpm_measured, 10);
-        var beat_times_chunked = chunk(beat_times, 10);
+        var bpm_chunks = chunk(bpm_measured, 2);
+        var beat_times_chunked = chunk(beat_times, 2);
         if (bpm_chunks[0][0][0] == "[") {
             bpm_chunks[0][0] = bpm_chunks[0][0].slice(1)
         }
@@ -304,7 +326,7 @@ function TapTapRevolution(io) {
             var interval_avg_bps = avg / 60.0;
             var factor = interval_avg_bps / bpsoverall;
 
-            beatchunks[i] = [beat_times_chunked[i], bpm_chunks[i], factor, i];
+            beatchunks[i] = [ beat_times_chunked[i], bpm_chunks[i], factor, i];
             console.log("beatchunks[" + i + "]: beat_times_chunked[" + i + "]" + beatchunks[i] + "bpm_chunks[" + i + "]: " + beatchunks[i][1] +
                     "factor: " + beatchunks[i][2] + " index: " + beatchunks[i][3]);
         }
@@ -341,32 +363,28 @@ function TapTapRevolution(io) {
                     });
 
                 }
+                {##}
+                                //initial shooting
 
-                //initial shooting
-                var randomIndex = iio.getRandomInt(0, inactiveArrows.length);
-                var randomArrow = moving_arrows[inactiveArrows[randomIndex]];
+
 
                 mySound.play();
-                io.setFramerate(initial_framerate);
-                randomArrow.setVel(0, 2);
-                updateScore();
-                    //     //update the player
-                inactiveArrows = inactiveArrows.splice(randomIndex, 1);
+                var randomIndex = iio.getRandomInt(0, inactiveArrows.length);
+                io.setFramerate(initial_framerate, moving_arrows[inactiveArrows[randomIndex]]);
+                moving_arrows[inactiveArrows[randomIndex]].setVel(0,2);
+
+                  //  updateScore();
+
                 console.log('sound loaded!', this);
+
 
             }
 
         })
 
 
-    })();
-
-
-//Main Update Function
-
-    // fireBeat(framerate) = io.setFramerate(bpm_overall, function () {
-    //     //update the player
-    //     updateScore();
+    };
+    setupsound();
 }
 
 

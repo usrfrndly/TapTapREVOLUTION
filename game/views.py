@@ -40,8 +40,13 @@ def search(request):
 
     song_list = list(DownloadedTrack.objects.values('title','artist'))
 
-
-    if 'title' in request.GET:
+    if 'dropdown-choice' in request.GET and request.GET['dropdown-choice'] is not None and request.GET[
+        'dropdown-choice'] != "":
+        song_id = request.GET['dropdown-choice']
+        track = list(DownloadedTrack.objects.filter(('id',song_id)))
+        return render(request,'TapTapRevolution.html',{'song'
+                                                       :track})
+    elif 'title' in request.GET:
         title = request.GET['title']
         # If form was submitted but empty
         if not title:
