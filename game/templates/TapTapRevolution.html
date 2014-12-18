@@ -27,6 +27,7 @@ function chunk(arr, len) {
 }
 
 function TapTapRevolution(io) {
+    var RIGHT;
     var songinfo = {{ song | safe }};
     var bpm_overall;
     bpm_overall = songinfo[0].bpm;
@@ -37,7 +38,6 @@ function TapTapRevolution(io) {
     var song_file = songinfo[0].song_file;
     console.log(songinfo[0]);
     var staticurl;
-    io.activateDebugger();
     staticurl = '/static/';
     var CANVAS_WIDTH = io.canvas.width;
     var CANVAS_HEIGHT = io.canvas.height;
@@ -50,10 +50,11 @@ function TapTapRevolution(io) {
     var scoreText;
     var bpsoverall = bpm_overall / 60.0;
     var current_framerate = 60.0;
+    var initial_framerate = 60.0;
     var inactiveArrows = [0, 1, 2, 3];
     var beatchunks = [];
     var count = 0;
-    var RIGHT = 0;
+    RIGHT = 0;
     var UP = 1;
     var DOWN = 2;
     var LEFT = 3;
@@ -61,24 +62,23 @@ function TapTapRevolution(io) {
     // Move to top
 
 
-    /**
-     * Score B
-     *
-     *
-     *
-     *
-     *
-     * oard
-     */
+    /* LAYOUT AND BACKGROUND SETTINGS  */
+
+    (function () {
+        io.setBGColor('#5e3f6b');
+
+        //io.addObj(new iio.Text('Your Score:', CANVAS_WIDTH - 100, 70)
+        io.addObj(new iio.Text('Your Score:', io.canvas.width - 150, 70)
+                .setFont('30px Century Gothic')
+                .setTextAlign('right')
+                .setFillStyle('#ffffff'));
+        scoreText = io.addObj(new iio.Text(score, io.canvas.width - 100, 70)
+                .setFont('30px Century Gothic')
+                .setTextAlign('right')
+                .setFillStyle('#ffffff'));
+    })();
     (function () {
 
-
-        moveToTop = function (obj) {
-            obj.pos.y = 0;
-            obj.setVel(0, 0);
-
-
-        };
         var playerSpeed = 8;
         /*
          //    Nonmoving arrows
@@ -93,12 +93,12 @@ function TapTapRevolution(io) {
         downArrowImage.src = staticurl + "images/down-border@1.5x.png";
         leftArrowImage.src = staticurl + "images/left-border@1.5x.png";
         var rightArrow, upArrow, downArrow, leftArrow;
-        rightArrowImage.onload = function (RIGHT) {
+        rightArrowImage.onload = function () {
             rightArrow = io.addObj(new iio.SimpleRect(CANVAS_WIDTH - canvasHorizontalSpacing, CANVAS_HEIGHT - ARROW_SIZE, 42, 42).createWithImage(rightArrowImage));
             main_arrows.push(rightArrow);
         };
 
-        upArrowImage.onload = function (UP) {
+        upArrowImage.onload = function () {
             upArrow = io.addObj(new iio.SimpleRect(CANVAS_WIDTH - (canvasHorizontalSpacing * 3.0), CANVAS_HEIGHT - ARROW_SIZE, 42, 42)
                     .createWithImage(upArrowImage))
             main_arrows.push(upArrow)
@@ -106,13 +106,13 @@ function TapTapRevolution(io) {
 
         };
 
-        downArrowImage.onload = function (DOWN) {
+        downArrowImage.onload = function () {
             downArrow = io.addObj(new iio.SimpleRect(canvasHorizontalSpacing * 3.0, CANVAS_HEIGHT - ARROW_SIZE, 42, 42)
                     .createWithImage(downArrowImage));
             main_arrows.push(downArrow)
         };
 
-        leftArrowImage.onload = function (LEFT) {
+        leftArrowImage.onload = function () {
             leftArrow = io.addObj(new iio.SimpleRect(canvasHorizontalSpacing, CANVAS_HEIGHT - ARROW_SIZE, 42, 42)
                     .createWithImage(leftArrowImage));
             main_arrows.push(leftArrow);
@@ -134,66 +134,59 @@ function TapTapRevolution(io) {
         leftArrowMovingImage.src = staticurl + "images/left-filled@1.5x.png";
         var rightArrowMoving, upArrowMoving, downArrowMoving, leftArrowMoving;
         rightArrowMovingImage.onload = function () {
-            rightArrowMoving = new iio.SimpleRect(CANVAS_WIDTH - canvasHorizontalSpacing, 0, 42, 42)
+            rightArrowMoving =  io.addObj(new iio.SimpleRect(CANVAS_WIDTH - canvasHorizontalSpacing, 0, 42, 42)
                     .createWithImage(rightArrowMovingImage)
                     .enableKinematics()
-                //.setVel(0, 2)
                     .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, function () {
                         rightArrowMoving.pos.y = 0;
-                        this.setVel(0, 2);
+                        this.setVel(0, 0)
                         inactiveArrows.push(RIGHT)
-                    });
-
-            var object1 = io.addObj(rightArrowMoving)
-            moving_arrows.push(object1)
+                    }));
+            moving_arrows.push(rightArrowMoving);
 
         };
 
         upArrowMovingImage.onload = function () {
-            upArrowMoving = new iio.SimpleRect(CANVAS_WIDTH - (canvasHorizontalSpacing * 3.0), 0, 42, 42)
+            upArrowMoving = io.addObj(new iio.SimpleRect(CANVAS_WIDTH - (canvasHorizontalSpacing * 3.0), 0, 42, 42)
                     .createWithImage(upArrowMovingImage)
                     .enableKinematics()
-                //.setVel(0, 2)
                     .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, function () {
                         upArrowMoving.pos.y = 0;
-                        this.setVel(0, 2);
+                        this.setVel(0, 0);
                         inactiveArrows.push(UP)
-                    });
-            var object1 = io.addObj(upArrowMoving)
-            moving_arrows.push(object1);
+                    }));
+            moving_arrows.push(upArrowMoving);
 
 
         };
 
         downArrowMovingImage.onload = function () {
-            downArrowMoving = new iio.SimpleRect(canvasHorizontalSpacing * 3.0, 0, 42, 42)
+            downArrowMoving =  io.addObj(new iio.SimpleRect(canvasHorizontalSpacing * 3.0, 0, 42, 42)
                     .createWithImage(downArrowMovingImage)
                     .enableKinematics()
-                //.setVel(0, 2)
                     .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, function () {
                         downArrowMoving.pos.y = 0;
-                        this.setVel(0, 2);
-                        inactiveArrows.push(DOWN)
-                    });
-            var object1 = io.addObj(downArrowMoving)
-            moving_arrows.push(object1);
+                        this.setVel(0, 0);
+                        inactiveArrows.push(DOWN);
+
+                    }));
+            moving_arrows.push(downArrowMoving);
 
 
         };
 
         leftArrowMovingImage.onload = function () {
-            leftArrowMoving = new iio.SimpleRect(canvasHorizontalSpacing, 0, 42, 42).createWithImage(leftArrowMovingImage)
+            leftArrowMoving =  io.addObj(new iio.SimpleRect(canvasHorizontalSpacing, 0, 42, 42)
+                    .createWithImage(leftArrowMovingImage)
                     .enableKinematics()
-                //.setVel(0, 2)
                     .setBound('bottom', CANVAS_HEIGHT + ARROW_SIZE, function () {
                         leftArrowMoving.pos.y = 0;
-                        this.setVel(0, 2);
+                        this.setVel(0, 0);
                         inactiveArrows.push(LEFT)
 
 
-                    });
-            var object1 = io.addObj(leftArrowMoving);
-            moving_arrows.push(object1);
+                    }));
+            moving_arrows.push(leftArrowMoving);
 
         };
 
@@ -258,32 +251,22 @@ function TapTapRevolution(io) {
         });
 
         fireBeat = function () {
+
             var randomIndex = iio.getRandomInt(0, inactiveArrows.length);
             var randomArrow = moving_arrows[inactiveArrows[randomIndex]];
-            io.setFramerate(current_framerate, function () {
-                randomArrow.setVel(0, 2)
-                //     //update the player
+            if (randomArrow != null){
+
+
+                io.setFramerate(current_framerate);
+                randomArrow.setVel(0, 2);
                 inactiveArrows.splice(randomIndex, 1);
+
                 updateScore();
-            })
+        }
+                //     //update the player
+
         };
 
-    })();
-
-
-    (function () {
-
-        io.setBGColor('#5e3f6b');
-
-        //io.addObj(new iio.Text('Your Score:', CANVAS_WIDTH - 100, 70)
-        io.addObj(new iio.Text('Your Score:', io.canvas.width - 150, 70)
-                .setFont('30px Century Gothic')
-                .setTextAlign('right')
-                .setFillStyle('#ffffff'));
-        scoreText = io.addObj(new iio.Text(score, io.canvas.width - 100, 70)
-                .setFont('30px Century Gothic')
-                .setTextAlign('right')
-                .setFillStyle('#ffffff'));
     })();
 
 
@@ -319,9 +302,9 @@ function TapTapRevolution(io) {
 
             console.log("The sum is: " + sum + ". The average is: " + avg);
             var interval_avg_bps = avg / 60.0;
-            var factor = interval_avg_bps / bpsoverall
+            var factor = interval_avg_bps / bpsoverall;
 
-            beatchunks[i] = [ beat_times_chunked[i], bpm_chunks[i], factor, i];
+            beatchunks[i] = [beat_times_chunked[i], bpm_chunks[i], factor, i];
             console.log("beatchunks[" + i + "]: beat_times_chunked[" + i + "]" + beatchunks[i] + "bpm_chunks[" + i + "]: " + beatchunks[i][1] +
                     "factor: " + beatchunks[i][2] + " index: " + beatchunks[i][3]);
         }
@@ -348,7 +331,7 @@ function TapTapRevolution(io) {
                         console.log(this.id + ' reached ' + eventPosition);
                         //divide it for seconds
 
-                        current_framerate = beatchunks[count][2] * current_framerate;
+                        current_framerate = beatchunks[count][2] * initial_framerate;
                         console.log("currentframerate: " + beatchunks[count][2]);
                         console.log(this.id + ' reached ' + eventPosition);
 
@@ -364,14 +347,12 @@ function TapTapRevolution(io) {
                 var randomArrow = moving_arrows[inactiveArrows[randomIndex]];
 
                 mySound.play();
-                io.setFramerate(60.0, function () {
-                    updateScore();
-                    randomArrow.setVel(0, 2);
+                io.setFramerate(initial_framerate);
+                randomArrow.setVel(0, 2);
+                updateScore();
                     //     //update the player
-                    inactiveArrows = inactiveArrows.splice(randomIndex, 1);
-                })
+                inactiveArrows = inactiveArrows.splice(randomIndex, 1);
                 console.log('sound loaded!', this);
-
 
             }
 
