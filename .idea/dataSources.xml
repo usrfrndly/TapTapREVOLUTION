@@ -7,6 +7,9 @@
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db.sqlite3</jdbc-url>
       <libraries>
         <library>
+          <url>file://$USER_HOME$/Library/Preferences/PyCharm30/jdbc-drivers/xerial-sqlite-license.txt</url>
+        </library>
+        <library>
           <url>file://$USER_HOME$/Library/Preferences/PyCharm30/jdbc-drivers/sqlite-jdbc-3.7.6.3-20110609.081603-3.jar</url>
         </library>
       </libraries>
